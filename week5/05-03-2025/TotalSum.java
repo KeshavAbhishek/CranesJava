@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * ==========================================================
@@ -52,5 +53,14 @@ public class TotalSum {
         .reduce(0, Integer::sum);
         
         System.out.println("Avg: " + tPrice/(productlist.size()));
+
+        double totalAmt = productlist.stream().collect(Collectors.averagingDouble(prod->prod.price));
+        System.out.println("Avg using collectors: " + totalAmt);
+
+        Product3 product4 = productlist.stream().min((p1,p2)->p1.price>p2.price?1:-1).get();
+        System.out.println("\nMin..\nPname: " + product4.pname + "\t" + product4.price);
+
+        Product3 product5 = productlist.stream().max((p1,p2)->p1.price>p2.price?1:-1).get();
+        System.out.println("\nMax..\nPname: " + product5.pname + "\t" + product5.price);
     }
 }
